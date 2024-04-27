@@ -1,6 +1,7 @@
 # Kylu
 A minimalistic scripting language written in python3
 
+RAW FILE IS SIGNIFICANTLY MORE LEGIBLE
 #### ################################################################################################################
 #### #                                             _---___                                                          #
 #### #                                        __  /       \                                                         #
