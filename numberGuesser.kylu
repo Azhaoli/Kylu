@@ -1,0 +1,21 @@
+
+NumberGuesser <- obj(minNum, maxNum){
+    GenRandom <- obj(){
+        seed <- CurrentTime() % 53
+        loop iter( i, span(0, 13) ){  ?? use 13 iterations
+            seed <- seed ^ ((seed+913) / 2^12)  ?? random math operations with big numbers
+            seed <- (899397*seed + 6823) % 16907
+        }
+        out( toInt(seed % (@maxNum - @minNum)) + @minNum )  ?? normalize so number is within the range minnum-maxnum
+    }
+    play <- obj(){
+        write("GUESS THE NUMBER FROM ", @minNum, " TO ", @maxNum, "$n")
+        targetNumber <- @GenRandom()
+        loop cond( True ){
+            guess <- toInt( prompt("enter a number>") ):expect(INVALIDOPERATION){ write("Please enter a number!$n") reset() }
+            if ( guess > targetNumber ){ write("TOO LARGE!$n") }, if ( guess < targetNumber ){ write("TOO SMALL!$n") } { stop() }
+        }
+        write("YOU WIN!!")
+}}
+
+NumberGuesser(100, 1000):play()

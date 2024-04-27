@@ -1,0 +1,34 @@
+ShowBoard <- obj( board ){
+    write(board:[0] + "  | " + board:[1] + " |  " + board:[2] + "$n")
+    write("___|___|___$n")
+    write("   |   |   $n")
+    write(board:[3] + "  | " + board:[4] + " |  " + board:[5] + "$n")
+    write("___|___|___$n")
+    write("   |   |   $n")
+    write(board:[6] + "  | " + board:[7] + " |  " + board:[8] + "$n")
+}
+
+CheckWin <- obj( board ){
+    conditions <- [
+        board:[0,8,4], board:[2,6,2], board:[0,6,3], board:[1,7,3], board:[2,8,3],
+        board:[0,2,1], board:[3,5,1], board:[6,8,1]
+    ]
+    out(
+        if( in(["X", "X", "X"], conditions) ){ write("X WINS! $n") False },
+        if( in(["O", "O", "O"], conditions) ){ write("O WINS! $n") False },
+        if( <!>in(" ", board) ){ write("STALEMATE! $n") False }{ True }
+    )
+}
+
+
+board <- [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+Xturn <- True
+loop cond( CheckWin(board) ){
+    ShowBoard(board)
+    player <- if( Xturn ){ "X" }{ "O" }
+    move <- toInt( prompt( player + "'s turn: ") ):expect(INVALIDOPERATION){ write("please enter a number 1-9 $n")  reset() }
+    if( <!>in(move, span(1, 10)) ){ write("please enter a number 1-9 $n")  reset()}
+    
+    if( <!>in(board:[move-1], ["X", "O"]) ){ board:[move-1] <- player }{ write("that space is already occupied $n")  reset() }
+    Xturn <- <!>Xturn
+}
