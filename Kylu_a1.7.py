@@ -745,10 +745,10 @@ class Interpreter:
             
         elif str(tree.contents.val) == "del":
             if tree.args[0].type == "SYMBOL":
-                self.GETVAR(tree.args[0].val, -1)  #### confirm target object is valid, value not used in del operation
+                if(t := self.GETVAR(tree.args[0].val, -1)).type == "ERROR": return t  #### confirm target object is valid, value not used in del operation
                 del self.OBJECTTREE[-1][tree.args[0].val]
             if tree.args[0].type == "ATTRIB":
-                self.GETVAR(tree.args[0].val.val, -2)
+                if(t := self.GETVAR(tree.args[0].val.val, -2)).type == "ERROR": return t
                 del self.OBJECTTREE[-2][tree.args[0].val.val]
             return Node("VOID", "", [])
 
