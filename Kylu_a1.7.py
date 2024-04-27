@@ -349,7 +349,7 @@ class Parser:
         
         value = token.group(0)[1:-1] if rule[1] == "STRING" else token.group(0)
         self.token = Node(rule[1], value, [self.idx, self.idx + len(token.group(0))])
-
+        return self.token
 
 ###############################################################################
     def FIELD(self, start, stop, sep=None):
