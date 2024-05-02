@@ -1,0 +1,12 @@
+Notable changes in version 1.7.2
+- Added system utility function type
+  - allowing users to directly interact with the interpreter without modifying it
+  - del, ext, monad, and filter refactored as system utilities
+  - List indexing, slicing, and object method calling are done with utility functions
+
+- Added file editing using the ReadFile and WriteFile functions
+  - can read from any file type as bytes, returing the new 'blob' data type
+  - can read from text files and put the result into a string
+  - options to read a portion of the file will be added soon
+
+  - minor performance imporvements to if statements and loops with some code streamlining
