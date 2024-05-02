@@ -833,7 +833,7 @@ class Interpreter:
             
        
         #### system builtin functions that require access to the parser/ other data in the interpreter
-        if str(tree.contents.val) in self.CLASSMETHODS:  #### ensure self.STATICMETHODS is compared with a string
+        if str(tree.contents.val) in self.CLASSMETHODS:
             funcArgs = [*tree.args, self]
             try: result = self.CLASSMETHODS[tree.contents.val](*funcArgs)
             except Exception as e:
